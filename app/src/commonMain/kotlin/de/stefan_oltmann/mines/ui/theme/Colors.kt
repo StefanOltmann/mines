@@ -60,3 +60,21 @@ val sliderColors = SliderColors(
     disabledInactiveTrackColor = Color.Red,
     disabledInactiveTickColor = Color.Red
 )
+
+fun lightColors() = AppThemeColors(
+    primary = Color(0xFFE67E22),
+    text = Color(0xFF000000),
+    background = Color(0xFFF5F5F5),
+    success = Color(0xFF2ECC71),
+    error = Color(0xFFE74C3C),
+    isLight = true,
+)
+
+fun darkColors() = AppThemeColors(
+    primary = Color(0xFFDF6900),
+    text = Color(0xFFFFFFFF),
+    background = Color(0xFF353B48),
+    success = Color(0xFF44BD32),
+    error = Color(0xFFC23616),
+    isLight = false,
+)

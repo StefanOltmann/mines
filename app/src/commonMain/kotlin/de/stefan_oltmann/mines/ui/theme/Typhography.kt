@@ -20,9 +20,12 @@
 package de.stefan_oltmann.mines.ui.theme
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import mines.app.generated.resources.Res
 import mines.app.generated.resources.economica_bold
 import mines.app.generated.resources.economica_bold_italic
@@ -30,27 +33,36 @@ import mines.app.generated.resources.economica_italic
 import mines.app.generated.resources.economica_regular
 import org.jetbrains.compose.resources.Font
 
-@Composable
-fun EconomicaFontFamily(): FontFamily = FontFamily(
-    Font(
-        resource = Res.font.economica_regular,
-        weight = FontWeight.Normal,
-        style = FontStyle.Normal
+data class AppThemeTypography(
+    val body: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp
     ),
-    Font(
-        resource = Res.font.economica_bold,
-        weight = FontWeight.Bold,
-        style = FontStyle.Normal
-    ),
-    Font(
-        resource = Res.font.economica_italic,
-        weight = FontWeight.Normal,
-        style = FontStyle.Italic
-    ),
-    Font(
-        resource = Res.font.economica_bold_italic,
-        weight = FontWeight.Bold,
-        style = FontStyle.Italic
-    )
 )
+
+@Composable
+fun EconomicaFontFamily(): FontFamily =
+    FontFamily(
+        Font(
+            resource = Res.font.economica_regular,
+            weight = FontWeight.Normal,
+            style = FontStyle.Normal
+        ),
+        Font(
+            resource = Res.font.economica_bold,
+            weight = FontWeight.Bold,
+            style = FontStyle.Normal
+        ),
+        Font(
+            resource = Res.font.economica_italic,
+            weight = FontWeight.Normal,
+            style = FontStyle.Italic
+        ),
+        Font(
+            resource = Res.font.economica_bold_italic,
+            weight = FontWeight.Bold,
+            style = FontStyle.Italic
+        )
+    )
 

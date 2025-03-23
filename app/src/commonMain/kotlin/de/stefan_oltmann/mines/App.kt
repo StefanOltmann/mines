@@ -48,6 +48,7 @@ import de.stefan_oltmann.mines.ui.AppFooter
 import de.stefan_oltmann.mines.ui.MinefieldCanvas
 import de.stefan_oltmann.mines.ui.SettingsDialog
 import de.stefan_oltmann.mines.ui.Toolbar
+import de.stefan_oltmann.mines.ui.theme.AppTheme
 import de.stefan_oltmann.mines.ui.theme.EconomicaFontFamily
 import de.stefan_oltmann.mines.ui.theme.colorBackground
 import de.stefan_oltmann.mines.ui.theme.colorCardBackground
@@ -61,173 +62,176 @@ import de.stefan_oltmann.mines.ui.theme.doubleSpacing
 @Composable
 fun App() {
 
-    val fontFamily = EconomicaFontFamily()
+    AppTheme {
 
-    val gameState = remember { GameState() }
+        val fontFamily = EconomicaFontFamily()
 
-    val gameConfig = remember {
-        mutableStateOf(
-            GameConfig(
-                cellSize = settings["cellSize"] ?: DEFAULT_CELL_SIZE,
-                mapWidth = settings["mapWidth"] ?: defaultMapWidth,
-                mapHeight = settings["mapHeight"] ?: defaultMapHeight,
-                difficulty = GameDifficulty.valueOf(settings["difficulty"] ?: GameDifficulty.EASY.name)
+        val gameState = remember { GameState() }
+
+        val gameConfig = remember {
+            mutableStateOf(
+                GameConfig(
+                    cellSize = settings["cellSize"] ?: DEFAULT_CELL_SIZE,
+                    mapWidth = settings["mapWidth"] ?: defaultMapWidth,
+                    mapHeight = settings["mapHeight"] ?: defaultMapHeight,
+                    difficulty = GameDifficulty.valueOf(settings["difficulty"] ?: GameDifficulty.EASY.name)
+                )
             )
-        )
-    }
+        }
 
-    val redrawState = remember { mutableStateOf(0) }
+        val redrawState = remember { mutableStateOf(0) }
 
-    /*
-     * Initially start a new game when opened.
-     */
-    LaunchedEffect(Unit) {
-        gameState.restart(gameConfig.value)
-    }
-
-    LaunchedEffect(gameConfig.value) {
-
-        val newGameConfig = gameConfig.value
-
-        val oldMapWidth = settings["mapWidth"] ?: defaultMapWidth
-        val oldMapHeight = settings["mapHeight"] ?: defaultMapHeight
-        val oldDifficulty = GameDifficulty.valueOf(settings["difficulty"] ?: GameDifficulty.EASY.name)
-
-        /* Save new settings to config */
-        settings["cellSize"] = newGameConfig.cellSize
-        settings["mapWidth"] = newGameConfig.mapWidth
-        settings["mapHeight"] = newGameConfig.mapHeight
-        settings["difficulty"] = newGameConfig.difficulty.name
-
-        val mapSettingsChanged =
-            oldMapWidth != newGameConfig.mapWidth ||
-                oldMapHeight != newGameConfig.mapHeight ||
-                oldDifficulty != newGameConfig.difficulty
-
-        /* Launch a new game every time the settings change something that influences the map */
-        if (mapSettingsChanged)
+        /*
+         * Initially start a new game when opened.
+         */
+        LaunchedEffect(Unit) {
             gameState.restart(gameConfig.value)
+        }
 
-        // HACK
-        redrawState.value += 1
-    }
+        LaunchedEffect(gameConfig.value) {
 
-    val elapsedSeconds by gameState.elapsedSeconds.collectAsState()
+            val newGameConfig = gameConfig.value
 
-    val showSettings = remember { mutableStateOf(false) }
+            val oldMapWidth = settings["mapWidth"] ?: defaultMapWidth
+            val oldMapHeight = settings["mapHeight"] ?: defaultMapHeight
+            val oldDifficulty = GameDifficulty.valueOf(settings["difficulty"] ?: GameDifficulty.EASY.name)
 
-    println("REDRAW")
+            /* Save new settings to config */
+            settings["cellSize"] = newGameConfig.cellSize
+            settings["mapWidth"] = newGameConfig.mapWidth
+            settings["mapHeight"] = newGameConfig.mapHeight
+            settings["difficulty"] = newGameConfig.difficulty.name
 
-    /*
+            val mapSettingsChanged =
+                oldMapWidth != newGameConfig.mapWidth ||
+                    oldMapHeight != newGameConfig.mapHeight ||
+                    oldDifficulty != newGameConfig.difficulty
+
+            /* Launch a new game every time the settings change something that influences the map */
+            if (mapSettingsChanged)
+                gameState.restart(gameConfig.value)
+
+            // HACK
+            redrawState.value += 1
+        }
+
+        val elapsedSeconds by gameState.elapsedSeconds.collectAsState()
+
+        val showSettings = remember { mutableStateOf(false) }
+
+        println("REDRAW")
+
+        /*
      * Force redraw if state changes.
      *
      * FIXME This is a hack
      */
-    redrawState.value
+        redrawState.value
 
-    Column {
+        Column {
 
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier
-                .weight(1F)
-                .fillMaxWidth()
-                .background(colorBackground)
-        ) {
-
-            val borderColor = when {
-                gameState.gameOver -> colorCardBorderGameOver
-                gameState.gameWon -> colorCardBorderGameWon
-                else -> colorCardBorder
-            }
-
-            Card(
-                colors = CardDefaults.cardColors().copy(
-                    containerColor = colorCardBackground
-                ),
-                shape = defaultRoundedCornerShape,
-                border = BorderStroke(1.dp, borderColor),
-                modifier = Modifier.doublePadding()
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .weight(1F)
+                    .fillMaxWidth()
+                    .background(AppTheme.colors.background)
             ) {
 
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier
-                        .padding(
-                            start = doubleSpacing,
-                            end = doubleSpacing,
-                            bottom = doubleSpacing
-                        )
+                val borderColor = when {
+                    gameState.gameOver -> colorCardBorderGameOver
+                    gameState.gameWon -> colorCardBorderGameWon
+                    else -> colorCardBorder
+                }
+
+                Card(
+                    colors = CardDefaults.cardColors().copy(
+                        containerColor = colorCardBackground
+                    ),
+                    shape = defaultRoundedCornerShape,
+                    border = BorderStroke(1.dp, borderColor),
+                    modifier = Modifier.doublePadding()
                 ) {
 
-                    Toolbar(
-                        highlightRestartButton = gameState.gameOver || gameState.gameWon,
-                        elapsedSeconds = elapsedSeconds,
-                        remainingFlagsCount = gameState.minefield?.getRemainingFlagsCount() ?: 0,
-                        fontFamily = fontFamily,
-                        showSettings = {
-                            showSettings.value = true
-                        },
-                        restartGame = {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier
+                            .padding(
+                                start = doubleSpacing,
+                                end = doubleSpacing,
+                                bottom = doubleSpacing
+                            )
+                    ) {
 
-                            gameState.restart(gameConfig.value)
+                        Toolbar(
+                            highlightRestartButton = gameState.gameOver || gameState.gameWon,
+                            elapsedSeconds = elapsedSeconds,
+                            remainingFlagsCount = gameState.minefield?.getRemainingFlagsCount() ?: 0,
+                            fontFamily = fontFamily,
+                            showSettings = {
+                                showSettings.value = true
+                            },
+                            restartGame = {
 
-                            // HACK
-                            redrawState.value += 1
-                        }
-                    )
+                                gameState.restart(gameConfig.value)
 
-                    Box {
-
-                        val verticalScrollState = rememberScrollState()
-                        val horizontalScrollState = rememberScrollState()
-
-                        Box(
-                            modifier = Modifier
-                                .verticalScroll(verticalScrollState)
-                                .horizontalScroll(horizontalScrollState)
-                        ) {
-
-                            val minefield = gameState.minefield
-
-                            if (minefield != null) {
-
-                                MinefieldCanvas(
-                                    minefield,
-                                    gameConfig,
-                                    redrawState,
-                                    fontFamily,
-                                    hit = { x, y -> gameState.hit(x, y) },
-                                    flag = { x, y -> gameState.flag(x, y) }
-                                )
+                                // HACK
+                                redrawState.value += 1
                             }
+                        )
+
+                        Box {
+
+                            val verticalScrollState = rememberScrollState()
+                            val horizontalScrollState = rememberScrollState()
+
+                            Box(
+                                modifier = Modifier
+                                    .verticalScroll(verticalScrollState)
+                                    .horizontalScroll(horizontalScrollState)
+                            ) {
+
+                                val minefield = gameState.minefield
+
+                                if (minefield != null) {
+
+                                    MinefieldCanvas(
+                                        minefield,
+                                        gameConfig,
+                                        redrawState,
+                                        fontFamily,
+                                        hit = { x, y -> gameState.hit(x, y) },
+                                        flag = { x, y -> gameState.flag(x, y) }
+                                    )
+                                }
+                            }
+
+                            if (verticalScrollState.canScrollForward || verticalScrollState.canScrollBackward)
+                                VerticalScrollbar(verticalScrollState)
+
+                            if (horizontalScrollState.canScrollForward || horizontalScrollState.canScrollBackward)
+                                HorizontalScrollbar(horizontalScrollState)
                         }
-
-                        if (verticalScrollState.canScrollForward || verticalScrollState.canScrollBackward)
-                            VerticalScrollbar(verticalScrollState)
-
-                        if (horizontalScrollState.canScrollForward || horizontalScrollState.canScrollBackward)
-                            HorizontalScrollbar(horizontalScrollState)
                     }
                 }
+
+                if (showSettings.value)
+                    SettingsDialog(
+                        gameConfig = gameConfig.value,
+                        fontFamily = fontFamily,
+                        onCancel = {
+                            showSettings.value = false
+                        },
+                        onConfirm = { newGameSettings ->
+
+                            showSettings.value = false
+
+                            gameConfig.value = newGameSettings
+                        }
+                    )
             }
 
-            if (showSettings.value)
-                SettingsDialog(
-                    gameConfig = gameConfig.value,
-                    fontFamily = fontFamily,
-                    onCancel = {
-                        showSettings.value = false
-                    },
-                    onConfirm = { newGameSettings ->
-
-                        showSettings.value = false
-
-                        gameConfig.value = newGameSettings
-                    }
-                )
+            AppFooter(fontFamily)
         }
-
-        AppFooter(fontFamily)
     }
 }
