@@ -2,7 +2,7 @@
 
 [![Kotlin](https://img.shields.io/badge/kotlin-2.1.20-blue.svg?logo=kotlin)](httpw://kotlinlang.org)
 
-<a href="https://ko-fi.com/G2G61FBTJX">
+<a href="https://ko-fi.com/StefanOltmann">
     <img src="images/support_me_on_kofi_dark.png" alt="Support me on Ko-fi" width="200">
 </a>
 <br>
