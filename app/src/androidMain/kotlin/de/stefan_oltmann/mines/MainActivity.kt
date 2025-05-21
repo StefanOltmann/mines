@@ -22,6 +22,12 @@ package de.stefan_oltmann.mines
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 
 class MainActivity : ComponentActivity() {
 
@@ -33,7 +39,19 @@ class MainActivity : ComponentActivity() {
         SettingsProvider.init(settingsSharedPreferences)
 
         setContent {
-            App()
+
+            /*
+             * On newer Android versions we need the proper paddings.
+             */
+            Box(
+                modifier = Modifier
+                    .background(Color.Black)
+                    .statusBarsPadding()
+                    .navigationBarsPadding()
+            ) {
+
+                App()
+            }
         }
     }
 }
