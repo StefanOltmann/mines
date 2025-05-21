@@ -19,6 +19,7 @@
 
 package de.stefan_oltmann.mines.ui
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -26,11 +27,13 @@ import androidx.compose.foundation.layout.requiredWidthIn
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.Icon
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.modifier.modifierLocalOf
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
@@ -39,6 +42,7 @@ import androidx.compose.ui.unit.sp
 import de.stefan_oltmann.mines.FONT_SIZE
 import de.stefan_oltmann.mines.ui.icons.IconDonate
 import de.stefan_oltmann.mines.ui.icons.IconFlag
+import de.stefan_oltmann.mines.ui.icons.IconKofi
 import de.stefan_oltmann.mines.ui.icons.IconRestart
 import de.stefan_oltmann.mines.ui.icons.IconSettings
 import de.stefan_oltmann.mines.ui.icons.IconTimer
@@ -101,14 +105,14 @@ fun Toolbar(
             modifier = Modifier
                 .size(buttonSize)
                 .noRippleClickable {
-                    uriHandler.openUri("https://github.com/sponsors/StefanOltmann")
+                    uriHandler.openUri("https://ko-fi.com/G2G61FBTJX")
                 }
         ) {
 
-            Icon(
-                imageVector = IconDonate,
+            Image(
+                imageVector = IconKofi,
                 contentDescription = null,
-                tint = colorForeground
+                modifier = Modifier.size(24.dp)
             )
         }
 
