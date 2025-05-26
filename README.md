@@ -6,7 +6,7 @@
     <img src="images/support_me_on_kofi_dark.png" alt="Support me on Ko-fi" width="200">
 </a>
 <br>
-<a href="https://apps.microsoft.com/detail/9NW19GL6BR5K?mode=popup">
+<a href="https://apps.microsoft.com/detail/9p4v6z0rgvv1?mode=popup">
     <img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Download from Microsoft Store" width="200">
 </a>
 <br>
