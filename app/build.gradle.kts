@@ -35,7 +35,7 @@ kotlin {
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
 
-        moduleName = "app"
+        outputModuleName = "app"
 
         browser {
 
