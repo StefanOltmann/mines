@@ -89,7 +89,7 @@ class Game {
 
         gameState =
             GameState(
-                minefield = Minefield.create(
+                minefield = Minefield.createSolvable(
                     config = gameConfig,
                     seed = generateSeed()
                 )
