@@ -2,7 +2,7 @@
  * Service Worker for Mines app
  */
 
-const CACHE_NAME = 'mines-cache-v2';
+const CACHE_NAME = 'mines-cache-v3';
 
 const ASSETS_TO_CACHE = [
   './',
