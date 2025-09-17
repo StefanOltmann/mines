@@ -25,8 +25,9 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
 
 private val gameStateScope = CoroutineScope(Dispatchers.Default)
 
@@ -35,6 +36,7 @@ class Game {
     private val _elapsedSeconds = MutableStateFlow(0L)
     val elapsedSeconds = _elapsedSeconds.asStateFlow()
 
+    @OptIn(ExperimentalTime::class)
     private var gameStartTime = Instant.DISTANT_PAST
 
     private var isTimerRunning = false
@@ -51,6 +53,7 @@ class Game {
     private fun generateSeed() =
         (1..Int.MAX_VALUE).random()
 
+    @OptIn(ExperimentalTime::class)
     private fun startTimer() {
 
         if (isTimerRunning)
