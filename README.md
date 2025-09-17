@@ -1,11 +1,8 @@
 # Mines
 
 [![Kotlin](https://img.shields.io/badge/kotlin-2.1.20-blue.svg?logo=kotlin)](httpw://kotlinlang.org)
+[![Sponsors](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub)](https://github.com/sponsors/StefanOltmann)
 
-<a href="https://ko-fi.com/StefanOltmann">
-    <img src="images/support_me_on_kofi_dark.png" alt="Support me on Ko-fi" width="200">
-</a>
-<br>
 <a href="https://apps.microsoft.com/detail/9p4v6z0rgvv1?mode=popup">
     <img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Download from Microsoft Store" width="200">
 </a>
