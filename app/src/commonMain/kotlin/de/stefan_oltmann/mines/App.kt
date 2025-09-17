@@ -57,6 +57,7 @@ import de.stefan_oltmann.mines.ui.theme.colorCardBorder
 import de.stefan_oltmann.mines.ui.theme.colorCardBorderGameOver
 import de.stefan_oltmann.mines.ui.theme.colorCardBorderGameWon
 import de.stefan_oltmann.mines.ui.theme.defaultRoundedCornerShape
+import de.stefan_oltmann.mines.ui.theme.defaultSpacing
 import de.stefan_oltmann.mines.ui.theme.doublePadding
 import de.stefan_oltmann.mines.ui.theme.doubleSpacing
 import io.github.alexzhirkevich.compottie.DotLottie
@@ -202,8 +203,8 @@ fun App() {
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
                         .padding(
-                            start = doubleSpacing,
-                            end = doubleSpacing,
+                            start = defaultSpacing,
+                            end = defaultSpacing,
                             bottom = doubleSpacing
                         )
                 ) {
