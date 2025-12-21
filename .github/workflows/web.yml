@@ -30,11 +30,13 @@ jobs:
             echo "::warning title=Invalid file permissions automatically fixed::$line"
           done
       - name: Deploy over FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        uses: modern-dev/ftp-mirror@v2
         with:
           server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
+          user: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /httpdocs/mines/
-          local-dir: app/build/dist/wasmJs/productionExecutable/
+          local_dir: "app/build/dist/wasmJs/productionExecutable"
+          remote_dir: "/httpdocs/mines"
+          delete: true
+          
 
