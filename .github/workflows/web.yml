@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy
 
 on:
   push:
@@ -38,5 +38,3 @@ jobs:
           local_dir: "app/build/dist/wasmJs/productionExecutable"
           remote_dir: "/httpdocs/mines"
           delete: true
-          
-
