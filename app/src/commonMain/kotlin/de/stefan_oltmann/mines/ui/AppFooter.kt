@@ -56,7 +56,7 @@ fun AppFooter(
                 horizontal = 2.dp
             )
             .noRippleClickable {
-                uriHandler.openUri("https://github.com/StefanOltmann/mines")
+                uriHandler.openUri("https://stefan-oltmann.de")
             }
     ) {
 
