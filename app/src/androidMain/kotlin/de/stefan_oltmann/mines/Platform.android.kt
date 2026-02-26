@@ -25,6 +25,8 @@ actual val settings: Settings = SettingsProvider.settings
 actual val defaultMapWidth: Int = 7
 actual val defaultMapHeight: Int = 7
 
+actual val isDesktop: Boolean = false
+
 /* Not effective as there is no right-click on Android */
 actual fun Modifier.addRightClickListener(key: Any?, onClick: (Offset) -> Unit): Modifier = this
 

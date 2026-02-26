@@ -37,10 +37,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import de.stefan_oltmann.mines.FONT_SIZE
+import de.stefan_oltmann.mines.isDesktop
 import de.stefan_oltmann.mines.ui.icons.IconFlag
 import de.stefan_oltmann.mines.ui.icons.IconRestart
 import de.stefan_oltmann.mines.ui.icons.IconSettings
 import de.stefan_oltmann.mines.ui.icons.IconTimer
+import de.stefan_oltmann.mines.ui.theme.DefaultSpacer
 import de.stefan_oltmann.mines.ui.theme.DoubleSpacer
 import de.stefan_oltmann.mines.ui.theme.HalfSpacer
 import de.stefan_oltmann.mines.ui.theme.buttonSize
@@ -141,5 +143,17 @@ fun Toolbar(
                 uriHandler.openUri("https://github.com/sponsors/StefanOltmann")
             }
         )
+
+        if (isDesktop) {
+
+            DefaultSpacer()
+
+            PlusVersionButton(
+                fontFamily = fontFamily,
+                onClick = {
+                    uriHandler.openUri("https://apps.microsoft.com/detail/9nd96xcdzrgb")
+                }
+            )
+        }
     }
 }

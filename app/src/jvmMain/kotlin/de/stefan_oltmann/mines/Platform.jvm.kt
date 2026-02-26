@@ -44,6 +44,8 @@ actual val settings: Settings = PreferencesSettings(preferences)
 actual val defaultMapWidth: Int = 10
 actual val defaultMapHeight: Int = 10
 
+actual val isDesktop: Boolean = true
+
 @OptIn(ExperimentalComposeUiApi::class)
 actual fun Modifier.addRightClickListener(key: Any?, onClick: (Offset) -> Unit): Modifier =
     this.pointerInput(key) {

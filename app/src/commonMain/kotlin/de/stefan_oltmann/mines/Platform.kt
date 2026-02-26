@@ -32,6 +32,8 @@ expect val settings: Settings
 expect val defaultMapWidth: Int
 expect val defaultMapHeight: Int
 
+expect val isDesktop: Boolean
+
 expect fun Modifier.addRightClickListener(
     key: Any?,
     onClick: (Offset) -> Unit
