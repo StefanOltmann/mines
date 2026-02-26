@@ -133,28 +133,31 @@ fun Toolbar(
             modifier = Modifier.widthIn(min = 20.dp)
         )
 
-        DoubleSpacer()
+        if (isDesktop) {
 
-        val uriHandler = LocalUriHandler.current
+            DoubleSpacer()
 
-        SponsorButton(
-            fontFamily = fontFamily,
-            onClick = {
-                uriHandler.openUri("https://github.com/sponsors/StefanOltmann")
-            }
-        )
+            val uriHandler = LocalUriHandler.current
 
-        DefaultSpacer()
+            SponsorButton(
+                fontFamily = fontFamily,
+                onClick = {
+                    uriHandler.openUri("https://github.com/sponsors/StefanOltmann")
+                }
+            )
 
-        PlusVersionButton(
-            fontFamily = fontFamily,
-            onClick = {
+            DefaultSpacer()
 
-                if (isDesktop)
-                    uriHandler.openUri("https://apps.microsoft.com/detail/9nd96xcdzrgb")
-                else
-                    uriHandler.openUri("https://play.google.com/store/apps/details?id=de.stefan_oltmann.mines_plus")
-            }
-        )
+            PlusVersionButton(
+                fontFamily = fontFamily,
+                onClick = {
+
+                    if (isDesktop)
+                        uriHandler.openUri("https://apps.microsoft.com/detail/9nd96xcdzrgb")
+                    else
+                        uriHandler.openUri("https://play.google.com/store/apps/details?id=de.stefan_oltmann.mines_plus")
+                }
+            )
+        }
     }
 }

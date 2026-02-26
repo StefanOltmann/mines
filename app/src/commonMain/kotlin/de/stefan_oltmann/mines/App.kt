@@ -22,8 +22,10 @@ package de.stefan_oltmann.mines
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -38,6 +40,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
 import com.russhwolf.settings.get
 import com.russhwolf.settings.set
@@ -47,9 +50,13 @@ import de.stefan_oltmann.mines.model.GameDifficulty
 import de.stefan_oltmann.mines.ui.AppFooter
 import de.stefan_oltmann.mines.ui.GameOverOverlay
 import de.stefan_oltmann.mines.ui.MinefieldCanvas
+import de.stefan_oltmann.mines.ui.PlusVersionButton
 import de.stefan_oltmann.mines.ui.SettingsDialog
+import de.stefan_oltmann.mines.ui.SponsorButton
 import de.stefan_oltmann.mines.ui.Toolbar
 import de.stefan_oltmann.mines.ui.lottie.ConfettiLottieImage
+import de.stefan_oltmann.mines.ui.theme.DefaultSpacer
+import de.stefan_oltmann.mines.ui.theme.DoubleSpacer
 import de.stefan_oltmann.mines.ui.theme.EconomicaFontFamily
 import de.stefan_oltmann.mines.ui.theme.colorBackground
 import de.stefan_oltmann.mines.ui.theme.colorCardBackground
@@ -257,6 +264,37 @@ fun App() {
 
                         if (horizontalScrollState.canScrollForward || horizontalScrollState.canScrollBackward)
                             HorizontalScrollbar(horizontalScrollState)
+                    }
+
+                    if (!isDesktop) {
+
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.padding(top = defaultSpacing)
+                        ) {
+
+                            val uriHandler = LocalUriHandler.current
+
+                            SponsorButton(
+                                fontFamily = fontFamily,
+                                onClick = {
+                                    uriHandler.openUri("https://github.com/sponsors/StefanOltmann")
+                                }
+                            )
+
+                            DefaultSpacer()
+
+                            PlusVersionButton(
+                                fontFamily = fontFamily,
+                                onClick = {
+
+                                    if (isDesktop)
+                                        uriHandler.openUri("https://apps.microsoft.com/detail/9nd96xcdzrgb")
+                                    else
+                                        uriHandler.openUri("https://play.google.com/store/apps/details?id=de.stefan_oltmann.mines_plus")
+                                }
+                            )
+                        }
                     }
                 }
             }
