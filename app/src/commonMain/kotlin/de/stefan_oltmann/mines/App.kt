@@ -80,7 +80,7 @@ fun App() {
                 cellSize = settings["mines_cell_size"] ?: DEFAULT_CELL_SIZE,
                 mapWidth = settings["mines_map_width"] ?: defaultMapWidth,
                 mapHeight = settings["mines_map_height"] ?: defaultMapHeight,
-                difficulty = GameDifficulty.valueOf(settings["mines_difficulty"] ?: GameDifficulty.EASY.name)
+                difficulty = GameDifficulty.fromSettingsValue(settings["mines_difficulty"])
             )
         )
     }
@@ -129,7 +129,7 @@ fun App() {
 
         val oldMapWidth = settings["mines_map_width"] ?: defaultMapWidth
         val oldMapHeight = settings["mines_map_height"] ?: defaultMapHeight
-        val oldDifficulty = GameDifficulty.valueOf(settings["mines_difficulty"] ?: GameDifficulty.EASY.name)
+        val oldDifficulty = GameDifficulty.fromSettingsValue(settings["mines_difficulty"])
 
         /* Save new settings to config */
         settings["mines_cell_size"] = newGameConfig.cellSize
