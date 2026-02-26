@@ -144,16 +144,17 @@ fun Toolbar(
             }
         )
 
-        if (isDesktop) {
+        DefaultSpacer()
 
-            DefaultSpacer()
+        PlusVersionButton(
+            fontFamily = fontFamily,
+            onClick = {
 
-            PlusVersionButton(
-                fontFamily = fontFamily,
-                onClick = {
+                if (isDesktop)
                     uriHandler.openUri("https://apps.microsoft.com/detail/9nd96xcdzrgb")
-                }
-            )
-        }
+                else
+                    uriHandler.openUri("https://play.google.com/store/apps/details?id=de.stefan_oltmann.mines_plus")
+            }
+        )
     }
 }
