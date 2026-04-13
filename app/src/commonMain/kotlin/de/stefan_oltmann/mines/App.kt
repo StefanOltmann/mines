@@ -234,7 +234,9 @@ fun App() {
                         }
                     )
 
-                    Box {
+                    Box(
+                        modifier = Modifier.weight(1f, fill = false)
+                    ) {
 
                         Box(
                             modifier = Modifier
